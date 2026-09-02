@@ -24,9 +24,7 @@ export default defineConfig({
   webServer: previewURL
     ? undefined
     : {
-        command: process.env.CI
-          ? "pnpm build && pnpm exec next start --hostname 127.0.0.1"
-          : "pnpm dev",
+        command: "pnpm build && pnpm exec next start --hostname 127.0.0.1 -p 3000",
         url: "http://127.0.0.1:3000",
         reuseExistingServer: !process.env.CI,
       },

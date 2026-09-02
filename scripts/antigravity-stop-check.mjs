@@ -22,6 +22,7 @@ const result = spawnSync("pnpm", ["check"], {
   cwd,
   encoding: "utf8",
   timeout: 240_000,
+  shell: process.platform === "win32",
 });
 
 if (result.status === 0) {

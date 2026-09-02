@@ -40,7 +40,11 @@ async function exists(candidate) {
 }
 
 function run(command, args, cwd) {
-  const result = spawnSync(command, args, { cwd, encoding: "utf8" });
+  const result = spawnSync(command, args, {
+    cwd,
+    encoding: "utf8",
+    shell: process.platform === "win32",
+  });
   return {
     ok: result.status === 0,
     output: `${result.stdout ?? ""}${result.stderr ?? ""}`.trim(),

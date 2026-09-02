@@ -326,6 +326,7 @@ export async function checkPackages({ root = "docs/pocs" } = {}) {
 function currentGitBranch() {
   const result = spawnSync("git", ["branch", "--show-current"], {
     encoding: "utf8",
+    shell: process.platform === "win32",
   });
   return result.status === 0 ? result.stdout.trim() : "";
 }
