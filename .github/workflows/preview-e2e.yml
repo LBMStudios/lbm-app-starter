@@ -1,29 +1,33 @@
 name: Preview E2E
 
 on:
+  repository_dispatch:
+    types:
+      - vercel.deployment.success
   deployment_status:
 
 permissions:
   contents: read
 
 concurrency:
-  group: preview-e2e-${{ github.event.deployment.sha }}
+  group: preview-e2e-${{ github.event.client_payload.url || github.event.deployment.sha }}
   cancel-in-progress: true
 
 jobs:
   browser:
     if: >-
-      github.event.deployment_status.state == 'success' &&
-      github.event.deployment.environment == 'Preview'
+      github.event_name == 'repository_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'Preview')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      PLAYWRIGHT_BASE_URL: ${{ github.event.deployment_status.target_url }}
+      PLAYWRIGHT_BASE_URL: ${{ github.event.client_payload.url || github.event.deployment_status.target_url }}
       VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.deployment.sha }}
+          ref: ${{ github.event.deployment.sha || github.sha }}
       - uses: pnpm/action-setup@v4
         with:
           version: 11.25.0
