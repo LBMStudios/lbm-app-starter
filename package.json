@@ -26,6 +26,7 @@
     "poc:record": "node scripts/poc-package.mjs record",
     "stack:adopt": "node scripts/stack-adopt.mjs",
     "stack:doctor": "node scripts/stack-doctor.mjs",
+    "scaffold:survey": "node scripts/scaffold-survey.mjs",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm poc:check && pnpm build",
     "verify": "pnpm check && pnpm test:e2e"
   },

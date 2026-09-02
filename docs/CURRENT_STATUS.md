@@ -15,6 +15,10 @@
 - Read-only adoption analyzer with stack detection, compatibility matrix and ordered next steps.
 - GitHub Actions, Dependabot and contribution templates.
 - Antigravity workspace rules, workflows and reusable skills.
+- Custom specialized agents (`ui-builder`, `db-architect`, `qa-tester`) in `.agents/agents/`.
+- Interactive survey engine with Universal Assistance branding, step transitions and Zod validation.
+- CLI scaffolding for interactive surveys (`pnpm scaffold:survey`) with `/scaffold-survey` workflow.
+- MCP configurations for live GitHub and Supabase schema inspection in `.agents/mcp_config.json`.
 - Validated meeting-to-POC packages with a `/continue-poc` Antigravity handoff.
 - Local stack doctor for agent files, commands, POC integrity, Git state and Vercel linkage.
 
