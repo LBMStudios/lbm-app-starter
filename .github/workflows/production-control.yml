@@ -1,0 +1,104 @@
+name: Production Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Production operation
+        required: true
+        type: choice
+        options:
+          - promote
+          - rollback
+      deployment_url:
+        description: Exact Vercel deployment URL to promote or restore
+        required: true
+        type: string
+      confirm_production:
+        description: I understand this changes production
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: ${{ inputs.confirm_production && inputs.operation == 'promote' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PLAYWRIGHT_BASE_URL: ${{ inputs.deployment_url }}
+      VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Verify release candidate
+        run: pnpm test:e2e
+      - name: Upload failure diagnostics
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-candidate-diagnostics
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  promote:
+    needs: verify
+    if: ${{ inputs.confirm_production && inputs.operation == 'promote' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production
+      url: ${{ inputs.deployment_url }}
+    env:
+      DEPLOYMENT_URL: ${{ inputs.deployment_url }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_SCOPE: ${{ vars.VERCEL_SCOPE }}
+      VERCEL_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Promote verified deployment
+        shell: bash
+        run: |
+          args=(promote "$DEPLOYMENT_URL" --yes --non-interactive --token "$VERCEL_TOKEN")
+          if [[ -n "$VERCEL_SCOPE" ]]; then args+=(--scope "$VERCEL_SCOPE"); fi
+          npx --yes vercel@59.11.2 "${args[@]}"
+
+  rollback:
+    if: ${{ inputs.confirm_production && inputs.operation == 'rollback' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: production
+      url: ${{ inputs.deployment_url }}
+    env:
+      DEPLOYMENT_URL: ${{ inputs.deployment_url }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_SCOPE: ${{ vars.VERCEL_SCOPE }}
+      VERCEL_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Restore selected deployment
+        shell: bash
+        run: |
+          args=(rollback "$DEPLOYMENT_URL" --yes --non-interactive --token "$VERCEL_TOKEN")
+          if [[ -n "$VERCEL_SCOPE" ]]; then args+=(--scope "$VERCEL_SCOPE"); fi
+          npx --yes vercel@59.11.2 "${args[@]}"

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "slug": "meeting-to-poc-automation",
+  "title": "Automatizar el paso de una reunión a un POC",
+  "source": {
+    "kind": "notes",
+    "date": "2026-09-02",
+    "reference": "Conversación de configuración del stack LBM",
+    "language": "es"
+  },
+  "problem": "Después de una reunión, el contexto debe volver a explicarse y el traspaso entre ChatGPT/Codex y Antigravity demora el inicio de una implementación verificable.",
+  "users": [
+    "Lucas como product owner y desarrollador",
+    "Agentes de ChatGPT/Codex y Antigravity"
+  ],
+  "desiredOutcome": "Entregar una reunión una sola vez y obtener una prueba vertical verificada que Antigravity pueda continuar desde el repositorio sin reconstruir el contexto.",
+  "constraints": [
+    "Usar las suscripciones y conectores existentes sin presuponer gasto de API",
+    "No almacenar transcripciones crudas, secretos ni datos personales innecesarios",
+    "No fusionar ni desplegar producción de forma autónoma"
+  ],
+  "scope": {
+    "in": [
+      "Contrato estructurado y validado para el handoff",
+      "Skill compartida y workflows ejecutables en Antigravity",
+      "Gate automático que detecta handoffs inválidos",
+      "Documentación del circuito operativo"
+    ],
+    "out": [
+      "Iniciar remotamente una conversación de Antigravity desde ChatGPT",
+      "Publicar o desplegar producción sin aprobación",
+      "Incorporar una API paga"
+    ]
+  },
+  "decisions": [
+    "GitHub será la fuente durable de verdad entre agentes",
+    "El QA de navegador será determinista y conservará imágenes solo en fallos",
+    "Antigravity continuará mediante el workflow /continue-poc"
+  ],
+  "assumptions": [
+    {
+      "statement": "Antigravity abrirá la misma rama del repositorio que Codex",
+      "needsValidation": false
+    },
+    {
+      "statement": "El conector de GitHub recibirá permiso de escritura sobre lbm-app-starter",
+      "needsValidation": true
+    }
+  ],
+  "openQuestions": [
+    "Qué proyecto real será el primer piloto después de publicar el starter"
+  ],
+  "acceptanceCriteria": [
+    {
+      "id": "AC-1",
+      "statement": "Un intake válido genera brief, tareas, verificación y handoff con routing estable."
+    },
+    {
+      "id": "AC-2",
+      "statement": "Un intake inválido detiene el flujo con un error útil antes de implementar."
+    },
+    {
+      "id": "AC-3",
+      "statement": "Antigravity recibe una ruta y un comando únicos para continuar el siguiente criterio pendiente."
+    },
+    {
+      "id": "AC-4",
+      "statement": "El gate pnpm check valida todos los handoffs versionados sin guardar la transcripción original."
+    }
+  ],
+  "poc": {
+    "hypothesis": "Un contrato versionado pequeño elimina la mayor parte del re-descubrimiento entre agentes y permite empezar a implementar inmediatamente después de una reunión.",
+    "demoFlow": [
+      "Entregar notas de reunión a ChatGPT/Codex",
+      "Generar y validar el paquete de POC",
+      "Implementar y verificar el primer corte vertical",
+      "Abrir la misma rama en Antigravity",
+      "Ejecutar /continue-poc con el handoff generado"
+    ],
+    "implementationNotes": [
+      "Mantener el contrato en versión 1 y rechazar campos inesperados",
+      "Agregar pruebas del generador y del routing",
+      "Incluir poc:check en el gate existente"
+    ],
+    "successSignals": [
+      "pnpm check finaliza correctamente",
+      "El primer paquete real pasa poc:check",
+      "El siguiente agente puede identificar rama, archivos, criterios y comandos sin usar el historial del chat"
+    ],
+    "requiresBrowser": false
+  },
+  "routing": {
+    "target": "antigravity",
+    "workflow": "/continue-poc",
+    "branch": "poc/meeting-to-poc-automation",
+    "entrypoint": "docs/pocs/meeting-to-poc-automation/brief.md",
+    "tasks": "docs/pocs/meeting-to-poc-automation/tasks.md",
+    "verification": "docs/pocs/meeting-to-poc-automation/verification.md",
+    "requiredChecks": [
+      "pnpm check"
+    ]
+  }
+}
