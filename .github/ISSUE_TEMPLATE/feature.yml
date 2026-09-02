@@ -1,0 +1,23 @@
+name: Nueva funcionalidad
+description: Define un resultado implementable por una persona o agente.
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Resultado esperado
+      description: Describe el cambio observable para el usuario.
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Criterios de aceptación
+      placeholder: "- [ ] Dado... cuando... entonces..."
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Restricciones y referencias
