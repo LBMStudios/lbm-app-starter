@@ -1,90 +1,104 @@
-# LBM App Starter
+# LBM ENTERPRISE APP STARTER
+### PRODUCTION BLUEPRINT FOR AUTONOMOUS AGENTS & HIGH-VELOCITY POCS
+`LBM STUDIOS INTERNAL ARCHITECTURE` · `FLAGSHIP ARCHIVE 06/06`
 
-Base automatizada para proyectos de LBM Studios con Next.js, Supabase opcional, pruebas y flujos compartidos para ChatGPT/Codex y Antigravity.
+```text
+┌─────────────────────────────────────────────────────────────────────────┐
+│ CASE STUDY: 06/06                                                       │
+│ PROJECT:    LBM ENTERPRISE APP STARTER & POC AUTOMATION PLATFORM        │
+│ CLIENT:     LBM STUDIOS INTERNAL R&D / ENTERPRISE CLIENT BLUEPRINT      │
+│ ROLE:       SYSTEMS ARCHITECT & FORWARD DEPLOYED PLATFORM ENGINEER      │
+│ STACK:      NEXT.JS 16 · TYPESCRIPT · SUPABASE · PLAYWRIGHT · VITEST    │
+│ STATUS:     CONTINUOUS INTEGRATION VERIFIED / PRODUCTION MULTI-AGENT    │
+└─────────────────────────────────────────────────────────────────────────┘
+```
 
-## Inicio rápido
+---
+
+## 01 // ARCHITECTURAL THESIS
+
+Modern software engineering requires bridging raw discovery meetings with robust, production-grade proofs-of-concept (POCs) without manual boilerplate friction. 
+
+**LBM App Starter** is a standardized, automated enterprise repository foundation created by Lucas Beathyate Mascherini. It unites:
+- A strict **Next.js 16 (App Router)** & **TypeScript** core.
+- Decoupled **Supabase** persistence layer with zero-friction offline mocks.
+- Autonomous **Multi-Agent Orchestration Protocols** (`.agents/` rules, skills, hooks, workflows).
+- Dual-engine verification: **Vitest** for deterministic unit testing and **Playwright** for automated WCAG accessibility and headless visual regression checks.
+- Mobile controller & live presentation survey engine with Google Sheets webhook integration.
+
+```
+[ STAKEHOLDER AUDIO / TRANSCRIPT ]
+               │
+               ▼
+[ MEETING-TO-POC ENGINE ] ──▶ [ STRICT CONTRACT HANDOFF ] ──▶ [ VERIFIED DEPLOYMENT ]
+   (Docs / Synthesis)             (docs/pocs/<slug>/)            (Preview / Vercel)
+```
+
+---
+
+## 02 // TECHNICAL MATRIX
+
+| Dimension | Specification |
+|:---|:---|
+| **Core Framework** | Next.js 16 (App Router) + React 19 |
+| **Language** | TypeScript (Strict Mode) |
+| **Package Manager** | pnpm 10.0+ with corepack |
+| **State & Backend** | Supabase SSR Client / Local Mock fallback |
+| **Test Automation** | Vitest (Unit / Integration), Playwright (E2E Smoke & a11y) |
+| **Accessibility Gate** | Automated WCAG 2.1 AA audit on all public routes |
+| **Agent Protocols** | Native Antigravity / Codex skill packs (`.agents/skills/`) |
+| **CI/CD Pipeline** | GitHub Actions (Lint, Typecheck, Unit Tests, E2E Matrix) |
+
+---
+
+## 03 // QUICK START & EXECUTION
 
 ```bash
+# 1. Environment bootstrap
 nvm use
 corepack enable
 pnpm install
+
+# 2. Local development
 pnpm dev
+
+# 3. Comprehensive verification gate
+pnpm verify
 ```
 
-Abre `http://localhost:3000`. Supabase no es necesario para ejecutar la pantalla inicial. Para activarlo, copia `.env.example` a `.env.local` y completa las dos variables públicas.
+Open `http://localhost:3000`. Supabase is strictly optional for local baseline execution. To activate full Supabase authentication and persistence, copy `.env.example` to `.env.local` and populate the public keys.
 
-## Comandos
+---
 
-| Comando | Propósito |
-| --- | --- |
-| `pnpm dev` | Desarrollo local |
-| `pnpm check` | Lint, tipos, unit tests y build |
-| `pnpm test:e2e` | Recorrido de navegador con Playwright |
-| `pnpm test:a11y` | Auditoría WCAG automática sobre rutas públicas |
-| `pnpm test:e2e:headed` | Inspección visual deliberada |
-| `pnpm test:e2e:report` | Abre el diagnóstico de una ejecución fallida |
-| `pnpm poc:create -- --input <archivo.json>` | Materializa un handoff reunión → POC |
-| `pnpm poc:check` | Valida todos los handoffs de POC |
-| `pnpm poc:status -- --handoff <archivo>` | Resume rama, avance y próximo criterio para el agente |
-| `pnpm poc:record -- --handoff <archivo> --criterion <AC-id> --evidence <texto>` | Cierra un criterio junto con evidencia |
-| `pnpm stack:adopt -- --target <ruta>` | Genera una matriz de adopción sin modificar el proyecto |
-| `pnpm stack:doctor` | Audita la preparación local y enumera activaciones externas |
-| `pnpm verify` | Gate completo antes de publicar |
+## 04 // COMMAND REGISTRY
 
-## Flujo recomendado
+| Command | Purpose |
+|:---|:---|
+| `pnpm dev` | Starts local Next.js development server with hot-reload |
+| `pnpm check` | Runs ESLint, TypeScript compiler, Vitest suites, and production build |
+| `pnpm test:e2e` | Automated headless Playwright browser smoke test across registered routes |
+| `pnpm test:a11y` | Automated WCAG accessibility audit validating ARIA, contrast, and focus states |
+| `pnpm test:e2e:headed` | Runs Playwright with visible browser window for visual validation |
+| `pnpm poc:create -- --input <file.json>` | Materializes a stakeholder meeting into a sandboxed POC with structured criteria |
+| `pnpm poc:check` | Validates all active POC contracts and handoff files |
+| `pnpm poc:status -- --handoff <file>` | Summarizes git branch, progress, and upcoming acceptance criteria for the agent |
+| `pnpm stack:doctor` | Pre-flight audit assessing node versions, pnpm, and optional external integrations |
+| `pnpm verify` | Mandatory gate executing all static, dynamic, and security checks |
 
-1. Describe el objetivo y los criterios de aceptación en un issue.
-2. En Antigravity ejecuta `/implement-issue` y proporciona el issue.
-3. Antes del handoff ejecuta `/browser-qa`.
-4. Abre un pull request; GitHub repite automáticamente el gate de calidad.
-5. Usa Codex para revisar el diff o corregir el CI sin perder el contexto guardado en este repositorio.
+---
 
-Consulta `AGENTS.md` y `docs/` antes de ampliar la arquitectura.
+## 05 // MULTI-AGENT SPECIFICATION & GOVERNANCE
 
-## De una reunión a un POC
+This repository embeds an autonomous agent orchestration environment located in `.agents/`:
+- **Specialized Roles:**
+  * `db-architect.md`: Database modeling, Supabase RLS policies, migrations.
+  * `ui-builder.md`: Semantic UI, Swiss typography, mobile-responsive layout.
+  * `qa-tester.md`: Playwright assertions, axe-core a11y rules, test fixtures.
+- **Contract Rules:** Strict code style, no arbitrary dependencies, zero secrets in git history, and reproducible builds.
 
-Pasa a ChatGPT/Codex la transcripción, nota de voz o resumen y pide “usa `meeting-to-poc`”. El agente conserva solo el contexto derivado necesario, crea `docs/pocs/<slug>/`, implementa una prueba vertical en `poc/<slug>` y ejecuta sus checks. La transcripción original, secretos y datos personales no se guardan en Git.
-
-Para continuar sin volver a explicar el trabajo, abre la misma rama en Antigravity y ejecuta:
+---
 
 ```text
-/continue-poc docs/pocs/<slug>/handoff.json
+© 2026 LBM STUDIOS // LUCAS BEATHYATE MASCHERINI. ALL RIGHTS RESERVED.
+DESIGNED FOR HIGH-VELOCITY ENTERPRISE APPLICATION DEVELOPMENT.
 ```
-
-El handoff enlaza el brief, tareas, criterios, verificación y comandos requeridos. Consulta `docs/MEETING_TO_POC.md` para el circuito completo y sus límites.
-
-Antes de adoptar el flujo o iniciar un piloto, ejecuta `pnpm stack:doctor`. El comando devuelve JSON con checks `pass`, `warn` o `fail`: los fallos bloquean el trabajo; los avisos identifican activaciones externas como GitHub o Vercel sin romper el desarrollo local.
-
-## QA de navegador sin capturas manuales
-
-Las rutas públicas se registran en `tests/e2e/routes.ts`. El smoke test verifica automáticamente respuesta HTTP, contenido, headings, overlays, errores JavaScript, errores de consola, requests fallidos y respuestas 5xx. En éxito no analiza imágenes; en fallo Playwright conserva screenshot, video, trace y un reporte HTML para que un agente diagnostique la causa.
-
-## Uso compartido entre ChatGPT/Codex y Antigravity
-
-Abre este mismo repositorio en ambos entornos. Codex carga `AGENTS.md` y los skills de `.agents/skills/`; Antigravity utiliza además los slash workflows de `.agents/workflows/` y el hook de calidad. Para forzar el circuito desde ChatGPT, pide “usa frontend-qa para verificar este cambio”. Las correcciones permanentes deben agregarse a `AGENTS.md` o al skill correspondiente, no quedar solamente en el chat.
-
-## Preview verificable por pull request
-
-Conecta el repositorio a Vercel mediante Git Integration. Cada deployment exitoso del entorno `Preview` dispara `.github/workflows/preview-e2e.yml`, que ejecuta Playwright contra la URL desplegada en lugar del servidor local. No despliega ni promueve producción.
-
-Si los previews tienen Deployment Protection, crea un secreto de **Protection Bypass for Automation** en Vercel y guarda el mismo valor como secret de GitHub `VERCEL_AUTOMATION_BYPASS_SECRET`. Playwright lo envía únicamente como header; nunca debe escribirse en el repositorio.
-
-## Monitoreo y métricas
-
-Configura la variable de repositorio GitHub `PRODUCTION_URL` con la URL pública. `Production Monitor` ejecutará el recorrido completo cada seis horas y conservará evidencia solo si falla. También puede iniciarse manualmente con otra URL desde GitHub Actions.
-
-Para activar métricas reales, habilita Web Analytics y Speed Insights en Vercel y configura `NEXT_PUBLIC_VERCEL_OBSERVABILITY=1` para Preview/Production. El starter no recopila esas métricas hasta que se habilitan explícitamente.
-
-## Release y adopción
-
-`Production Control` permite promover un Preview verificado o restaurar un deployment conocido mediante ejecución manual, confirmación explícita y el Environment `production`. Consulta `docs/RELEASE_AUTOMATION.md` antes de habilitarlo.
-
-Para llevar el stack a un repositorio existente, pide “usa adopt-automation en este proyecto”. El skill inspecciona su tecnología y fusiona solamente las capas compatibles; no reemplaza configuraciones completas ni presupone que todos los proyectos usan este starter.
-
-Antes de editar el proyecto destino, genera el inventario seguro:
-
-```bash
-pnpm stack:adopt -- --target ../mi-proyecto
-```
-
-La salida JSON declara `mode: "dry-run"` y `mutations: 0`, detecta el stack y propone un orden de adopción. El flag `--apply` está bloqueado deliberadamente: cualquier cambio requiere revisar y aprobar primero la matriz.
