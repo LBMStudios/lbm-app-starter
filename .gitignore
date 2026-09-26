@@ -27,3 +27,7 @@
 
 # Antigravity local credentials
 .agents/mcp_config.json
+
+.antigravity/
+.vscode/
+
