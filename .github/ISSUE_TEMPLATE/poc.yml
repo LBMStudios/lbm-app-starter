@@ -1,0 +1,38 @@
+name: Reunión a POC
+description: Captura el mínimo contexto para convertir una reunión en un POC verificable.
+title: "poc: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        No pegues credenciales, datos personales ni una transcripción confidencial. Comparte una referencia autorizada o un resumen derivado.
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Resultado esperado
+      description: ¿Qué debería poder demostrar el POC al terminar?
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Fuente de la reunión
+      description: Fecha y referencia breve a notas, audio o transcripción autorizada.
+    validations:
+      required: true
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Decisiones y restricciones
+      placeholder: "- Decisión confirmada\n- Restricción conocida"
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Criterios observables
+      description: Incluye lo confirmado; el agente propondrá los faltantes como supuestos visibles.
+      placeholder: "- El usuario puede..."
+  - type: textarea
+    id: exclusions
+    attributes:
+      label: Fuera de alcance
+      placeholder: "- Producción\n- Integración definitiva"

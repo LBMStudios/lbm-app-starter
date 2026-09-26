@@ -1,0 +1,60 @@
+{
+  "name": "lbm-app-starter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run && node --test tests/scripts/*.test.mjs",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:a11y": "playwright test tests/e2e/accessibility.spec.ts",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
+    "poc:create": "node scripts/poc-package.mjs create",
+    "poc:check": "node scripts/poc-package.mjs check",
+    "poc:status": "node scripts/poc-package.mjs status",
+    "poc:record": "node scripts/poc-package.mjs record",
+    "stack:adopt": "node scripts/stack-adopt.mjs",
+    "stack:doctor": "node scripts/stack-doctor.mjs",
+    "scaffold:survey": "node scripts/scaffold-survey.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm poc:check && pnpm build",
+    "verify": "pnpm check && pnpm test:e2e"
+  },
+  "dependencies": {
+    "@supabase/ssr": "0.12.5",
+    "@supabase/supabase-js": "2.113.0",
+    "@vercel/analytics": "2.0.1",
+    "@vercel/speed-insights": "2.0.0",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.62.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.3",
+    "@types/node": "24.10.12",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.4",
+    "jsdom": "30.0.1",
+    "postcss": "8.5.6",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3",
+    "vitest": "4.1.0"
+  }
+}

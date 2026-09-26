@@ -1,0 +1,58 @@
+{
+  "slug": "agencias-r-2026",
+  "title": "Encuesta de Calidad y Atención para Agencias",
+  "subtitle": "Desde Universal Assistance trabajamos día a día para brindarte la mejor experiencia de servicio.",
+  "welcomeMessage": "Te invitamos a responder la siguiente encuesta para conocer tu experiencia y seguir mejorando juntos.",
+  "thankYouMessage": "¡Muchas gracias!",
+  "thankYouSubtitle": "Tu opinión es fundamental para nosotros. Tendremos en cuenta tus respuestas.",
+  "ctaText": "Ingresar al Portal Partners",
+  "ctaUrl": "https://www.universal-assistance.com/partners",
+  "questions": [
+    {
+      "id": "visita_frecuencia",
+      "type": "multiple_choice",
+      "title": "¿Con qué frecuencia te gustaría recibir la visita de tu ejecutivo de Universal Assistance?",
+      "options": [
+        { "id": "semanal", "label": "Una vez por semana" },
+        { "id": "quincenal", "label": "Cada quince días" },
+        { "id": "mensual", "label": "Una vez al mes" },
+        { "id": "bimestral", "label": "Bimestralmente" },
+        { "id": "virtual", "label": "Prefiero visita virtual" }
+      ]
+    },
+    {
+      "id": "calificacion_comercial",
+      "type": "score",
+      "title": "¿Cómo calificarías la atención de nuestro Equipo Comercial?",
+      "description": "Siendo 5 estrellas excelente",
+      "maxScore": 5
+    },
+    {
+      "id": "autogestion_portal",
+      "type": "multiple_choice",
+      "title": "¿Te interesaría autogestionar tus emisiones y cotizaciones a través de nuestro portal de partners?",
+      "options": [
+        { "id": "ya_uso", "label": "Sí, ya lo estoy haciendo", "jumpToStep": 4 },
+        { "id": "me_gustaria", "label": "Sí, me gustaría gestionarlo desde el portal", "jumpToStep": 5 }
+      ]
+    },
+    {
+      "id": "mejoras_portal",
+      "type": "text",
+      "title": "¿Qué te gustaría agregar o mejorar en nuestro portal de partners?",
+      "description": "Tu opinión nos ayuda a perfeccionar la experiencia de emisión."
+    },
+    {
+      "id": "calificacion_cobranzas",
+      "type": "score",
+      "title": "¿Cómo calificarías nuestra gestión de facturación y cobranzas?",
+      "description": "Siendo 5 estrellas excelente",
+      "maxScore": 5
+    },
+    {
+      "id": "comentarios_finales",
+      "type": "text",
+      "title": "¿Hay algún otro comentario o sugerencia que quieras compartirnos?"
+    }
+  ]
+}

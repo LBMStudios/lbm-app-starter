@@ -1,0 +1,12 @@
+{
+  "quality-gate": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "node scripts/antigravity-stop-check.mjs",
+        "timeout": 300
+      }
+    ]
+  }
+}
